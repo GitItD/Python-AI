@@ -36,6 +36,6 @@ print('w0', w0)                                                          # Print
 print('w1', w1)
 print('w2', w2)
 
-y = w0 + w1*X1 + w2*X2                                                  # Update value of 
+y = w0 + w1*X1 + w2*X2                                                  # Update value of perceptron function
 
 # Summary: overall, this code adjusts weights based on whether if prediction was T/F to allow adjustments during learning.
