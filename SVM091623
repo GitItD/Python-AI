@@ -13,11 +13,12 @@ X2 = x[:,1].reshape(L,1)                                                      # 
 y = y_orig.reshape(L,1)                                                       # Store 'y_orig' into arrays of (L, 1). 
 
                                                                           # Machine learning initial setup:
-w0, w1, w2 = 1, 0, 0                                                          # Creating our weights, start at 0 for 1st iteration
-count = 0                                                                     # Counter to go through each point
+w0, w1, w2 = 1, 0, 0                                                          # Creating our weights, w0 = bias term, w1 = weight for data 'X1', w2 = weight for data 'X2'
+count = 0                                                                     # Counter to go through each point, starting from 0
 iteration = 1                                                                 # Number of loops starting from 1
 alpha = 0.01                                                                  # learning rate
 
+                                                                        # Perceptron equation: w(new) = w(old) + alpha*y*x
                                                                           # Generate while loop:
 while(iteration<1000):                                                        # While loop is below 1000 iterations
     y_pred = w0 + w1 * X1 + w2 * X2                                           # Add the weights to the data X1 and X2, which are arrays of x seperated into two groups
