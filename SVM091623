@@ -1,37 +1,38 @@
 # Support Vector Machine (SVM) Classification
                                                                           # Set up your data:
-x = np.array([[5,2], [3,6], [2,7], [1,6], [5,3], [3.5,4], [4,3]])              # Set up x array
-y_orig = np.array([-1, 1, 1, 1, -1, -1, -1])                                   # Set up y_orig into an array containing equal elements to x, but is either 1 or -1
+x = np.array([[5,2], [3,6], [2,7], [1,6], [5,3], [3.5,4], [4,3]])              # Set up 'x' array
+y_orig = np.array([-1, 1, 1, 1, -1, -1, -1])                                   # Set up 'y_orig' into an array containing equal elements to 'x', but is either 1 or -1 (used for T/F later on)
 x
 
 # Perceptron
-                                                                          #                                                                             
-L = y_orig.size                                                               # Generate the size of y_orig (7 elements) and store into var L
-X1 = x[:,0].reshape(L,1)                                                      # select every 1st element of x and store into array with dimension of (rows, column) = (L, 1). Store result into X1 
-X2 = x[:,1].reshape(L,1)                                                      # same as above, except 2nd element. Store into X2
-y = y_orig.reshape(L,1)                                                       # Store y_orig into arrays of (L, 1). 
+                                                                          # Put the data into a 2D array:                                                                             
+L = y_orig.size                                                               # Generate the size of y_orig (7 elements) and store into 'L'
+X1 = x[:,0].reshape(L,1)                                                      # select every 1st element of 'x' and store into array with dimension of (rows, column) = (L, 1). Store result into 'X1' 
+X2 = x[:,1].reshape(L,1)                                                      # same as above, except 2nd element. Store into 'X2'
+y = y_orig.reshape(L,1)                                                       # Store 'y_orig' into arrays of (L, 1). 
 
-w0, w1, w2 = 1, 0, 0 #Creating our weights, start at 0 for 1st iteration
+                                                                          # Machine learning initial setup:
+w0, w1, w2 = 1, 0, 0                                                          # Creating our weights, start at 0 for 1st iteration
+count = 0                                                                     # Counter to go through each point
+iteration = 1                                                                 # Number of loops starting from 1
+alpha = 0.01                                                                  # learning rate
 
-count = 0 #Counter to go through each point
-iteration = 1 #Number of iterations
-
-alpha = 0.01 #learning rate
-while(iteration<1000):
-    y_pred = w0 + w1 * X1 + w2 * X2 # The current prediction
-    prod = y_pred*y # Calculate product to see whether correct
-    #(If > 1, the prediction is correct)
-    for val in prod: # go through all of product
-        if(val<=1): # if the prediction incorrect
-            w0 = w0 + alpha * y[count] #nudge w vect in right direction
+                                                                          # Generate while loop:
+while(iteration<1000):                                                        # While loop is below 1000 iterations
+    y_pred = w0 + w1 * X1 + w2 * X2 # The current prediction                  # Add the weights to the data X1 and X2, which are arrays of x seperated into two groups
+    prod = y_pred*y # Calculate product to see whether correct                # Multiply the prediction value to the T/F values assigned by y, store into 'prod'
+                                                                              # (If > 1, the prediction is correct)
+    for val in prod: # go through all of product                          # Generate for loop that goes through all the elements of 'prod'
+        if(val<=1): # if the prediction incorrect                            # set up condition for false prediction (if val<=1)
+            w0 = w0 + alpha * y[count]                                       # change all the weight sum of learning rate * current element of the T/F table of 'y'. If the prediction was incorrect, increase false, if it is correct, increase truth values.      
             w1 = w1 + alpha*y[count]*X1[count]
             w2 = w2 + alpha*y[count]*X2[count]
         count += 1
     count = 0
-    iteration += 1
-    
-print('w0', w0)
+    iteration += 1                                                        
+                                                                        
+print('w0', w0)                                                          # Print the results
 print('w1', w1)
 print('w2', w2)
 
-y = w0 + w1*X1 + w2*X2
+y = w0 + w1*X1 + w2*X2                                                  # Update value of y
