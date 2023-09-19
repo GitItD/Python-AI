@@ -1,10 +1,14 @@
 from matplotlib import pyplot as plt
-# Plot the predictions
-plt.scatter(x[:,0], x[:,1], c = (y<0).reshape(1, -1)[0])
+plt.scatter(x[:,0], x[:,1], c = (y<0).reshape(1, -1)[0])            
+# Create a scatter plot with the following: (all of the first elements of x, all of the second elements of x), with the following conditions:
+# 'c' sets the color condition where 'y<0' is 'True' and 'False' otherwise (with different colors for each results), 
+# and .reshape(1, -1) reshapes the boolean array into 1 row and as n columns.
+# [0] selects the first and the only row from the array to flatten it into a 1D array. 
 
 # Plot the line
-q = np.array([0, 7])
-x_ = -(w1/w2).reshape(1,-1)*q - w0/w2
+q = np.array([0, 7])                                # Create a numpy array of dimensions [0, 7] into 'q'.
+x_ = -(w1/w2).reshape(1,-1)*q - w0/w2                
+# Using data from inverse of weight of w1/w2 is reshaped into its transpose, and is multiplied by the feature vector (the number of our observations). This is then minus by the bias term/weight from data X2.
 # f(x) = w.x+b+1 support vector line
 x_p = -(w1/w2).reshape(1, -1)*q - w0/w2 - 1/w2
 # f(x) = w.x+b+1 another support vector line
