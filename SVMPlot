@@ -1,0 +1,20 @@
+from matplotlib import pyplot as plt
+# Plot the predictions
+plt.scatter(x[:,0], x[:,1], c = (y<0).reshape(1, -1)[0])
+
+# Plot the line
+q = np.array([0, 7])
+x_ = -(w1/w2).reshape(1,-1)*q - w0/w2
+# f(x) = w.x+b+1 support vector line
+x_p = -(w1/w2).reshape(1, -1)*q - w0/w2 - 1/w2
+# f(x) = w.x+b+1 another support vector line
+x_n = -(w1/w2).reshape(1, -1)*q - w0/w2 + 1/w2
+
+plt.plot(q, x_[0])
+plt.plot(q, x_p[0], 'r--')
+plt.plot(q, x_n[0], 'r--')
+plt.xlim([0, 6])
+plt.ylim([0, 12])
+plt.grid()
+plt.xlabel(r'$X_{1}$')
+plt.ylabel(r'$Y_(2)$')
